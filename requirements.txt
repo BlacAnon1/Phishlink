@@ -1,0 +1,6 @@
+requests
+jsonschema
+cryptography
+pyOpenSSL
+beautifulsoup4
+shortuuid
